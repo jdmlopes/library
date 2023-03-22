@@ -3,7 +3,7 @@
   --font-color: white;
   --card-bg: purple;
   --footer-bg: purple;
-  --bg-gradient: linear-gradient(to right, rgb(64, 71, 165), rgb(164, 70, 201));
+  --bg-gradient: linear-gradient(to right, rgb(34, 59, 145), rgb(164, 70, 201));
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -58,6 +58,10 @@ body {
   font-weight: bold;
 }
 
+#menu .new-book-btn:hover {
+  filter: brightness(90%);
+}
+
 /* BOOK CARDS SECTION */
 #books {
   padding: 20px;
@@ -106,7 +110,8 @@ svg {
   width: 30px;
 }
 
-svg:hover {
+svg:hover,
+button:hover {
   cursor: pointer;
 }
 
