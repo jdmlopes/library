@@ -1,0 +1,81 @@
+:root {
+  --background-color: rgb(32, 32, 32);
+  --font-color: white;
+  --card-bg: purple;
+  --footer-bg: purple;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--font-color);
+  min-width: 300px;
+}
+
+#content {
+  min-height: 100vh;
+  display: grid;
+  grid-template: auto auto 1fr auto / 1fr;
+}
+
+/* LOGO SECTION */
+
+#logo {
+  padding: 25px 10px 30px 25px;
+  font-size: 1.7rem;
+}
+
+/* MENU SECTION */
+
+#menu,
+#books {
+  justify-self: center;
+  width: 85vw;
+  box-sizing: border-box;
+}
+
+#menu {
+  border-bottom: var(--font-color) solid 5px;
+  padding: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+#menu .new-book {
+  background-color: var(--card-bg);
+  color: var(--font-color);
+  padding: 10px 20px;
+  border-radius: 30px;
+  border-style: none;
+  font-size: 18px;
+}
+
+/* BOOK CARDS SECTION */
+#books {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, calc(95% / 3)));
+  grid-template-rows: repeat(auto-fit, 200px);
+  grid-auto-rows: 200px;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  padding: 5px;
+  background-color: var(--card-bg);
+}
+
+/* FOOTER SECTION */
+
+#footer {
+  padding: 10px 0 20px;
+  font-size: 1.2rem;
+  background-color: var(--footer-bg);
+  text-align: center;
+}
