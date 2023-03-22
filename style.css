@@ -106,11 +106,23 @@ svg {
   width: 30px;
 }
 
+svg:hover {
+  cursor: pointer;
+}
+
+.edit svg:hover {
+  fill: skyblue;
+}
+
+.delete svg:hover {
+  fill: darkgray;
+}
 /* FOOTER SECTION */
 
 #footer {
   padding: 10px 0 20px;
   font-size: 1.2rem;
   background-color: var(--footer-bg);
+  background-image: var(--bg-gradient);
   text-align: center;
 }
