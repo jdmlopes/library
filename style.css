@@ -98,6 +98,20 @@ body {
   align-self: center;
 }
 
+.read-btn {
+  font-size: 18px;
+  border-radius: 30px;
+  width: 140px;
+  border-style: none;
+  color: var(--font-color);
+  padding: 5px;
+  background-color: rgb(214, 98, 98);
+}
+
+.read {
+  background-color: rgb(88, 190, 88);
+}
+
 .card-options {
   display: flex;
   gap: 10px;
