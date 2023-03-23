@@ -8,15 +8,19 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.toggleRead = function () {
+  this.read = this.read ? false : true;
+};
+
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
   insertBook(book);
 }
 
 function insertCardsToDOM() {
-  for (const book of library) {
+  for (const [index, book] of library.entries()) {
     const bookElement = createDOMElement("div", "card", "");
-    bookElement.setAttribute("data-index", `${library.length - 1}`);
+    bookElement.setAttribute("data-index", `${index}`);
 
     const titleElement = createDOMElement("div", "title", book.title);
 
@@ -40,6 +44,7 @@ function insertCardsToDOM() {
     const readFlagElement = createDOMElement("div", "read-flag");
 
     const readButton = createDOMElement("button", "read-btn", "Not Read");
+    readButton.setAttribute("data-index", `${index}`);
     if (book.read) {
       readButton.classList.add("read");
       readButton.textContent = "Read";
@@ -84,6 +89,15 @@ function insertBook(book) {
   library.push(book);
 }
 
+function toggleRead(element) {
+  library[+element.dataset.index].toggleRead();
+  if (element.classList.toggle("read")) {
+    element.textContent = "Read";
+    return;
+  }
+  element.textContent = "Not Read";
+}
+
 addBookToLibrary(
   "The Chronicles of Narnia: The Lion, The Witch and The Wardrobe",
   "Num Sei",
@@ -95,4 +109,10 @@ addBookToLibrary("Chuck Testa 2", "John Tester", 250, true);
 addBookToLibrary("Chuck Testa 3", "John Tester", 100, false);
 addBookToLibrary("Chuck Testa 4: Tokyo Drift ", "John Tester", 300, true);
 addBookToLibrary("Chuck Testa: The Return", "John Tester", 800, false);
+
 insertCardsToDOM();
+
+const readButtons = document.querySelectorAll(".read-btn");
+readButtons.forEach((btn) => {
+  btn.addEventListener("click", toggleRead.bind(null, btn));
+});

@@ -104,6 +104,7 @@ body {
   width: 140px;
   border-style: none;
   color: var(--font-color);
+  font-weight: bold;
   padding: 5px;
   background-color: rgb(214, 98, 98);
 }
