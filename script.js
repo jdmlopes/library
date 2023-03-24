@@ -1,4 +1,5 @@
 const books = document.querySelector("#books");
+const modal = document.querySelector("#modal");
 const library = [];
 
 function Book(title, author, pages, read) {
@@ -14,7 +15,7 @@ Book.prototype.toggleRead = function () {
 
 function addBookToLibrary(title, author, pages, read) {
   const book = new Book(title, author, pages, read);
-  insertBook(book);
+  library.push(book);
 }
 
 //Erases the book card list and inserts all of them
@@ -95,10 +96,6 @@ function createDOMElement(elementName, className, textContent = "") {
   return element;
 }
 
-function insertBook(book) {
-  library.push(book);
-}
-
 function toggleRead(button, index) {
   library[index].toggleRead();
   if (button.classList.toggle("read")) {
@@ -113,7 +110,35 @@ function deleteBook(index) {
   insertCardsToDOM();
 }
 
-addBookToLibrary(
+document.querySelector(".new-book-btn").addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+document.querySelector("#cancel-btn").addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+document.querySelector("#insert-book-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const book = new Book(
+    e.target[0].value,
+    e.target[1].value,
+    e.target[2].value,
+    e.target[3].checked
+  );
+  library.push(book);
+  modal.style.display = "none";
+  e.target.reset();
+  insertCardsToDOM();
+});
+
+/* addBookToLibrary(
   "The Chronicles of Narnia: The Lion, The Witch and The Wardrobe",
   "Num Sei",
   600,
@@ -123,6 +148,6 @@ addBookToLibrary("Chuck Testa", "John Tester", 200, false);
 addBookToLibrary("Chuck Testa 2", "John Tester", 250, true);
 addBookToLibrary("Chuck Testa 3", "John Tester", 100, false);
 addBookToLibrary("Chuck Testa 4: Tokyo Drift ", "John Tester", 300, true);
-addBookToLibrary("Chuck Testa: The Return", "John Tester", 800, false);
+addBookToLibrary("Chuck Testa: The Return", "John Tester", 800, false); */
 
 insertCardsToDOM();

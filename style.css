@@ -4,6 +4,8 @@
   --card-bg: purple;
   --footer-bg: purple;
   --bg-gradient: linear-gradient(to right, rgb(34, 59, 145), rgb(164, 70, 201));
+  --red-btn-color: rgb(214, 98, 98);
+  --green-btn-color: rgb(88, 190, 88);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -106,11 +108,11 @@ body {
   color: var(--font-color);
   font-weight: bold;
   padding: 5px;
-  background-color: rgb(214, 98, 98);
+  background-color: var(--red-btn-color);
 }
 
 .read {
-  background-color: rgb(88, 190, 88);
+  background-color: var(--green-btn-color);
 }
 
 .card-options {
@@ -145,4 +147,63 @@ button:hover {
   background-color: var(--footer-bg);
   background-image: var(--bg-gradient);
   text-align: center;
+}
+
+/* INSERT BOOK MODAL */
+
+#modal {
+  display: none;
+  position: fixed;
+  background-color: rgba(128, 0, 128, 0.123);
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+  overflow: auto;
+}
+
+.modal-content {
+  width: clamp(280px, 750px, 80%);
+  height: 70%;
+  background-color: var(--background-color);
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  border-radius: 15px;
+  box-shadow: 10px 10px 40px 10px black;
+}
+
+#insert-book-form {
+  display: grid;
+  align-items: center;
+  font-size: 16px;
+}
+
+#insert-book-form div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#insert-book-form #modal-btns {
+  justify-content: flex-end;
+}
+
+#modal-btns button {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: var(--font-color);
+  border-radius: 30px;
+  border-style: none;
+}
+
+#insert-book-btn {
+  background-color: var(--green-btn-color);
+}
+
+#cancel-btn {
+  background-color: var(--red-btn-color);
 }
