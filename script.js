@@ -1,5 +1,6 @@
 const books = document.querySelector("#books");
 const modal = document.querySelector("#modal");
+const bookForm = document.querySelector("#insert-book-form");
 const library = [];
 
 function Book(title, author, pages, read) {
@@ -12,11 +13,6 @@ function Book(title, author, pages, read) {
 Book.prototype.toggleRead = function () {
   this.read = this.read ? false : true;
 };
-
-function addBookToLibrary(title, author, pages, read) {
-  const book = new Book(title, author, pages, read);
-  library.push(book);
-}
 
 //Erases the book card list and inserts all of them
 function insertCardsToDOM() {
@@ -47,7 +43,6 @@ function insertCardsToDOM() {
     const readFlagElement = createDOMElement("div", "read-flag");
 
     const readButton = createDOMElement("button", "read-btn", "Not Read");
-    readButton.setAttribute("data-index", `${index}`);
     readButton.addEventListener(
       "click",
       toggleRead.bind(null, readButton, index)
@@ -65,7 +60,7 @@ function insertCardsToDOM() {
         <path d="M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z"/>
       </svg>
     `;
-
+    editButton.addEventListener("click", openEditModal.bind(null, index));
     const deleteButton = createDOMElement("div", "delete", "");
     deleteButton.innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -110,9 +105,32 @@ function deleteBook(index) {
   insertCardsToDOM();
 }
 
-document.querySelector(".new-book-btn").addEventListener("click", () => {
+function openEditModal(index) {
   modal.style.display = "block";
-});
+  document.querySelector("#insert-book-btn").style.display = "none";
+  document.querySelector("#edit-book-btn").style.display = "block";
+  document.querySelector("#insert-book-title").style.display = "none";
+  document.querySelector("#edit-book-title").style.display = "block";
+  bookForm.setAttribute("data-type", "edit");
+  bookForm.setAttribute("data-index", index);
+  bookForm[0].value = library[index].title;
+  bookForm[1].value = library[index].author;
+  bookForm[2].value = library[index].pages;
+  bookForm[3].checked = library[index].read;
+}
+
+function openNewBookModal() {
+  modal.style.display = "block";
+  document.querySelector("#edit-book-btn").style.display = "none";
+  document.querySelector("#insert-book-btn").style.display = "block";
+  document.querySelector("#edit-book-title").style.display = "none";
+  document.querySelector("#insert-book-title").style.display = "block";
+  bookForm.setAttribute("data-type", "insert");
+}
+
+document
+  .querySelector(".new-book-btn")
+  .addEventListener("click", openNewBookModal);
 
 window.addEventListener("click", (e) => {
   if (e.target === modal) {
@@ -129,25 +147,14 @@ document.querySelector("#insert-book-form").addEventListener("submit", (e) => {
   const book = new Book(
     e.target[0].value,
     e.target[1].value,
-    e.target[2].value,
+    Number(e.target[2].value),
     e.target[3].checked
   );
-  library.push(book);
+  if (e.target.dataset.type === "insert") library.push(book);
+  if (e.target.dataset.type === "edit") library[+e.target.dataset.index] = book;
   modal.style.display = "none";
   e.target.reset();
   insertCardsToDOM();
 });
-
-/* addBookToLibrary(
-  "The Chronicles of Narnia: The Lion, The Witch and The Wardrobe",
-  "Num Sei",
-  600,
-  true
-);
-addBookToLibrary("Chuck Testa", "John Tester", 200, false);
-addBookToLibrary("Chuck Testa 2", "John Tester", 250, true);
-addBookToLibrary("Chuck Testa 3", "John Tester", 100, false);
-addBookToLibrary("Chuck Testa 4: Tokyo Drift ", "John Tester", 300, true);
-addBookToLibrary("Chuck Testa: The Return", "John Tester", 800, false); */
 
 insertCardsToDOM();

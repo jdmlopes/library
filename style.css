@@ -200,10 +200,15 @@ button:hover {
   border-style: none;
 }
 
-#insert-book-btn {
+#insert-book-btn,
+#edit-book-btn {
   background-color: var(--green-btn-color);
 }
 
 #cancel-btn {
   background-color: var(--red-btn-color);
+}
+
+.hidden {
+  display: none;
 }

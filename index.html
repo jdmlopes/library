@@ -11,8 +11,9 @@
   <body>
     <div id="modal">
       <div class="modal-content">
-        <form action="" id="insert-book-form">
-          <h1>Insert New Book</h1>
+        <form action="" id="insert-book-form" data-type="insert">
+          <h1 class="hidden" id="insert-book-title">Insert New Book</h1>
+          <h1 class="hidden" id="edit-book-title">Edit Book</h1>
           <div>
             <label for="book-title">Title: </label>
             <input type="text" id="book-title" required />
@@ -23,7 +24,13 @@
           </div>
           <div>
             <label for="book-pages">Pages: </label>
-            <input type="tel" id="book-pages" required />
+            <input
+              type="tel"
+              id="book-pages"
+              required
+              pattern="[0-9]+"
+              title="only positive numbers allowed"
+            />
           </div>
           <div>
             <label for="book-read">Finished Reading?</label>
@@ -31,7 +38,12 @@
           </div>
 
           <div id="modal-btns">
-            <button type="submit" id="insert-book-btn">Add</button>
+            <button type="submit" class="hidden" id="edit-book-btn">
+              Save
+            </button>
+            <button type="submit" class="hidden" id="insert-book-btn">
+              Add
+            </button>
             <button id="cancel-btn" type="reset">Cancel</button>
           </div>
         </form>
