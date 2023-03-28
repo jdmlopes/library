@@ -3,7 +3,7 @@ const modal = document.querySelector("#modal");
 const bookForm = document.querySelector("#insert-book-form");
 const library = [];
 
-function Book(title, author, pages, read) {
+/* function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -12,7 +12,20 @@ function Book(title, author, pages, read) {
 
 Book.prototype.toggleRead = function () {
   this.read = this.read ? false : true;
-};
+}; */
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  toggleRead() {
+    this.read = this.read ? false : true;
+  }
+}
 
 //Erases the book card list and inserts all of them
 function insertCardsToDOM() {
